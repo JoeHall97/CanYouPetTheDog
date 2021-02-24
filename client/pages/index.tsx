@@ -1,5 +1,7 @@
 import Layout from "../components/Layout";
+import React from "react";
 import axios from "axios";
+import _ from "lodash";
 import { Button } from "@material-ui/core";
 
 class IndexPage extends React.Component {
@@ -12,9 +14,14 @@ class IndexPage extends React.Component {
 
 	render() {
 		const getAPIPost = async () => {
-			const res = await axios.get<{ text: string }>("/api/dogs");
+			const res = await axios.get("/api/dogs");
+			console.log(res);
+			const tweets = _.map(res.data.data, (data) => {
+				return data.text;
+			});
+			console.log(tweets);
 			this.setState({
-				message: res.data.text,
+				message: tweets,
 			});
 		};
 
