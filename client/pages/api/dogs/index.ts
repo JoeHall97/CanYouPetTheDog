@@ -3,6 +3,7 @@ import Twitter from "twitter-v2";
 import _ from "lodash";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+	const BreakException = { message: "Found relevant tweet" };
 	try {
 		const client = new Twitter({
 			consumer_key: process.env.TWITTER_CONSUMER_KEY!,
@@ -18,16 +19,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 			"tweet.fields": "text",
 			exclude: "retweets,replies",
 		});
-		// console.log(data);
-		_.map(data, (tweet) => {
+		data.forEach((tweet) => {
 			if (tweet.text.toLowerCase().includes("valheim")) {
-				return res.status(200).json({ data: tweet });
+				console.log(tweet);
+				res.status(200).json({ data: tweet.text });
+				throw BreakException;
 			}
 		});
 		res.status(500).json({ statusCode: 500, message: "Tweets not found." });
 		// res.status(200).json({ data: data });
 	} catch (err) {
-		res.status(500).json({ statusCode: 500, message: err.message });
+		if (err != BreakException) {
+			res.status(500).json({ statusCode: 500, message: err.message });
+		}
 	}
 };
 

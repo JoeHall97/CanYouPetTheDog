@@ -15,12 +15,9 @@ class IndexPage extends React.Component {
 	render() {
 		const getAPIPost = async () => {
 			const res = await axios.get("/api/dogs");
-			const tweets = _.map(res.data.data, (data) => {
-				return data.text;
-			});
-			console.log(tweets);
+			console.log(res.data.data.text);
 			this.setState({
-				message: tweets,
+				message: res.data.data.text,
 			});
 		};
 
