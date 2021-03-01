@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import Twitter from "twitter-v2";
-import _ from "lodash";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	const BreakException = { message: "Found relevant tweet" };
@@ -19,15 +18,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 			"tweet.fields": "text",
 			exclude: "retweets,replies",
 		});
+		const gameName: string = req.body.name.toLowerCase();
 		data.forEach((tweet) => {
-			if (tweet.text.toLowerCase().includes("valheim")) {
-				console.log(tweet);
-				res.status(200).json({ data: tweet.text });
+			if (tweet.text.toLowerCase().includes(gameName)) {
+				// console.log(tweet);
+				res.status(200).json({ data: tweet });
 				throw BreakException;
 			}
 		});
-		res.status(500).json({ statusCode: 500, message: "Tweets not found." });
-		// res.status(200).json({ data: data });
+		res.status(404).json({ message: "Tweets not found." });
 	} catch (err) {
 		if (err != BreakException) {
 			res.status(500).json({ statusCode: 500, message: err.message });
