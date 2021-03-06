@@ -14,21 +14,35 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		// TWITTER V2 API
 		// iterate through timeline, find relevant tweet (if it exists), return it
 		// else, return error
-		let { data } = await client.get("users/1102974090581864448/tweets", {
+		let { data, meta } = await client.get("users/1102974090581864448/tweets", {
 			"tweet.fields": "text",
 			exclude: "retweets,replies",
+			max_results: "100",
 		});
-		const gameName: string = req.body.name.toLowerCase();
-		data.forEach((tweet) => {
-			if (tweet.text.toLowerCase().includes(gameName)) {
-				// console.log(tweet);
-				res.status(200).json({ data: tweet });
-				throw BreakException;
-			}
-		});
+		let next_token = meta.next_token;
+		while (next_token) {
+			const gameName: string = req.body.name.toLowerCase();
+			data.forEach((tweet) => {
+				if (tweet.text.toLowerCase().includes(gameName)) {
+					// console.log(tweet);
+					res.status(200).json({ data: tweet });
+					throw BreakException;
+				}
+			});
+			const next_tweets = await client.get("users/1102974090581864448/tweets", {
+				"tweet.fields": "text",
+				exclude: "retweets,replies",
+				max_results: "100",
+				pagination_token: next_token,
+			});
+			data = next_tweets.data;
+			meta = next_tweets.meta;
+			next_token = meta.next_token;
+		}
 		res.status(404).json({ message: "Tweets not found." });
 	} catch (err) {
 		if (err != BreakException) {
+			console.log(err);
 			res.status(500).json({ statusCode: 500, message: err.message });
 		}
 	}

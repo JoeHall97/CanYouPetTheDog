@@ -5,6 +5,13 @@
 // import { User } from 'path/to/interfaces';
 
 export type User = {
-  id: number
-  name: string
-}
+	id: number;
+	name: string;
+};
+
+export type Meta = {
+	oldest_id: string;
+	newest_id: string;
+	result_count: number;
+	next_token: string;
+};

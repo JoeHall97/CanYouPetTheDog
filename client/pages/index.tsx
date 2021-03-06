@@ -1,13 +1,13 @@
 import Layout from "../components/Layout";
 import React from "react";
 import axios from "axios";
-import { Input, Button } from "@material-ui/core";
-
+import "../styles/Home.module.css";
+import { Input, Button, Typography, Grid } from "@material-ui/core";
 class IndexPage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			message: "Waiting for res...",
+			message: "",
 			gameName: "",
 		};
 		this.handleChange = this.handleChange.bind(this);
@@ -39,17 +39,36 @@ class IndexPage extends React.Component {
 		};
 
 		return (
-			<Layout title="Home | Next.js + TypeScript Example">
-				<form noValidate autoComplete="off">
-					<Input
-						type="text"
-						value={this.state.gameName}
-						onChange={this.handleChange}
-						placeholder="Enter a game name..."
-					/>
-					<Button onClick={getAPIPost}>Find </Button>
-				</form>
-				<p>{this.state.message}</p>
+			<Layout title="Can You Pet The Dog">
+				<div className="root">
+					<Grid container direction="row" spacing={4} alignItems="center" justify="center">
+						<Grid item xs={1} />
+						<Grid item xs={10}>
+							<Typography variant="h1" align="center">
+								Can You Pet The Dog?
+							</Typography>
+						</Grid>
+						<Grid item xs={1} />
+						<Grid item xs={1} />
+						<Grid item xs={10}>
+							<Input
+								type="text"
+								value={this.state.gameName}
+								onChange={this.handleChange}
+								placeholder="Enter a game name..."
+								style={{ width: "70%" }}
+							/>
+							<Button style={{ backgroundColor: "coral", width: "30%" }} onClick={getAPIPost}>
+								Find
+							</Button>
+						</Grid>
+						<Grid item xs={1} />
+						<Grid item xs={10}>
+							<p hidden={this.state.message === ""}>{this.state.message}</p>
+						</Grid>
+						<Grid item xs={1} />
+					</Grid>
+				</div>
 			</Layout>
 		);
 	}
