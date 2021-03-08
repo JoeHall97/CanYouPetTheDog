@@ -3,6 +3,8 @@ import Twitter from "twitter-v2";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	const BreakException = { message: "Found relevant tweet" };
+	const canPet = "you can pet";
+	const cannotPet = "you cannot pet";
 	try {
 		const client = new Twitter({
 			consumer_key: process.env.TWITTER_CONSUMER_KEY!,
@@ -23,8 +25,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		while (next_token) {
 			const gameName: string = req.body.name.toLowerCase();
 			data.forEach((tweet) => {
-				if (tweet.text.toLowerCase().includes(gameName)) {
-					// console.log(tweet);
+				if (
+					tweet.text.toLowerCase().includes(gameName) &&
+					(tweet.text.toLowerCase().includes(canPet) || tweet.text.toLowerCase().includes(cannotPet))
+				) {
+					// console.log("TEST");
 					res.status(200).json({ data: tweet });
 					throw BreakException;
 				}

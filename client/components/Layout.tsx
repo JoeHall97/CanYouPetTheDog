@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import { Typography } from "@material-ui/core";
+import "../styles/Nav.module.css";
 
 type Props = {
 	children?: ReactNode;
@@ -17,13 +19,15 @@ const Layout = ({ children, title = "This is the default title" }: Props) => (
 		<header>
 			<div style={{ width: "100%", alignContent: "center" }}>
 				<nav>
-					<Link href="/">
-						<a>Home</a>
-					</Link>{" "}
-					|{" "}
-					<Link href="/about">
-						<a>About</a>
-					</Link>
+					<Typography variant="h4" align="center">
+						<Link href="/">
+							<a className="nav-item">Home</a>
+						</Link>{" "}
+						|{" "}
+						<Link href="/about">
+							<a className="nav-item">About</a>
+						</Link>
+					</Typography>
 				</nav>
 			</div>
 		</header>

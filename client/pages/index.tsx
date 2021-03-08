@@ -3,12 +3,14 @@ import React from "react";
 import axios from "axios";
 import "../styles/Home.module.css";
 import { Input, Button, Typography, Grid } from "@material-ui/core";
+
 class IndexPage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			message: "",
 			gameName: "",
+			dog: true,
 		};
 		this.handleChange = this.handleChange.bind(this);
 	}
@@ -18,23 +20,51 @@ class IndexPage extends React.Component {
 	}
 
 	render() {
+		const cannotFindGame = "It doesn't seem like there's anything on this game.";
+		const errorMessage = "Oops, something went wrong!";
 		const getAPIPost = async () => {
 			try {
 				const res = await axios.post("/api/dogs", { name: this.state.gameName });
-				console.log(res.data.data.text);
+				// console.log(res.data.data.text);
+				const tweetText: string = res.data.data.text;
 				this.setState({
-					message: res.data.data.text,
+					message: tweetText,
+					dog: tweetText.toLowerCase().includes("dog"),
 				});
 			} catch (err) {
-				if (err.response.status === 404) {
+				console.log(err);
+				if (err.response != undefined && err.response.status === 404) {
 					this.setState({
-						message: "It doesn't seem like there's anything on this game.",
+						message: cannotFindGame,
 					});
 				} else {
 					this.setState({
-						message: "Oops, something went wrong!",
+						message: errorMessage,
 					});
 				}
+			}
+		};
+
+		const displayMessage = () => {
+			if (!this.state.message) {
+				return "";
+			} else if (this.state.message === cannotFindGame || this.state.message === errorMessage) {
+				return this.state.message;
+			} else {
+				let url = "";
+				let message = this.state.message.trim();
+				for (let i = message.length - 1; i > 0; i--) {
+					if (message[i] === " ") {
+						url = message.slice(i + 1, message.length);
+						message = message.slice(0, i);
+						break;
+					}
+				}
+				if (this.state.dog) {
+					return message;
+				}
+				return `You cannot pet the dog in ${this.state.gameName}...
+But, ${message}`;
 			}
 		};
 
@@ -62,11 +92,13 @@ class IndexPage extends React.Component {
 								Find
 							</Button>
 						</Grid>
-						<Grid item xs={1} />
-						<Grid item xs={10}>
-							<p hidden={this.state.message === ""}>{this.state.message}</p>
+						<Grid item xs={2} />
+						<Grid item xs={8}>
+							<Typography style={{ whiteSpace: "pre-line" }} variant="h4" align="center">
+								{displayMessage()}
+							</Typography>
 						</Grid>
-						<Grid item xs={1} />
+						<Grid item xs={2} />
 					</Grid>
 				</div>
 			</Layout>
