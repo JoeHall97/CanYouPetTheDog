@@ -1,7 +1,7 @@
 import Layout from "../components/Layout";
 import React from "react";
 import axios from "axios";
-import "../styles/Home.module.css";
+import styles from "../styles/index.module.css";
 import { Input, Button, Typography, Grid } from "@material-ui/core";
 
 class IndexPage extends React.Component {
@@ -15,11 +15,11 @@ class IndexPage extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-	handleChange(event) {
+	handleChange(event): void {
 		this.setState({ gameName: event.target.value });
 	}
 
-	render() {
+	render(): JSX.Element {
 		const cannotFindGame = "It doesn't seem like there's anything on this game.";
 		const errorMessage = "Oops, something went wrong!";
 		const getAPIPost = async () => {
@@ -56,12 +56,18 @@ class IndexPage extends React.Component {
 				for (let i = message.length - 1; i > 0; i--) {
 					if (message[i] === " ") {
 						url = message.slice(i + 1, message.length);
+						console.log(url);
 						message = message.slice(0, i);
 						break;
 					}
 				}
 				if (this.state.dog) {
-					return message;
+					return (
+						<div>
+							<p>{message}</p>
+							<img src={url} alt="Image of Game" />
+						</div>
+					);
 				}
 				return `You cannot pet the dog in ${this.state.gameName}...
 But, ${message}`;
@@ -70,11 +76,11 @@ But, ${message}`;
 
 		return (
 			<Layout title="Can You Pet The Dog">
-				<div className="root">
+				<div>
 					<Grid container direction="row" spacing={4} alignItems="center" justify="center">
 						<Grid item xs={1} />
 						<Grid item xs={10}>
-							<Typography variant="h1" align="center">
+							<Typography variant="h1" align="center" className={styles.titleText}>
 								Can You Pet The Dog?
 							</Typography>
 						</Grid>
@@ -86,9 +92,10 @@ But, ${message}`;
 								value={this.state.gameName}
 								onChange={this.handleChange}
 								placeholder="Enter a game name..."
-								style={{ width: "70%" }}
+								style={{ width: "70%", color: "#abb2bf" }}
+								color="secondary"
 							/>
-							<Button style={{ backgroundColor: "coral", width: "30%" }} onClick={getAPIPost}>
+							<Button className={styles.searchButton} style={{ backgroundColor: "#e6c07b" }} onClick={getAPIPost}>
 								Find
 							</Button>
 						</Grid>

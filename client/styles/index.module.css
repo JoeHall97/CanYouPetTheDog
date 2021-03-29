@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+.searchButton {
+	background-color: #e6c07b;
+	width: 30%;
+}
+
+.centerText {
+	justify-content: center;
+	align-items: center;
+}
+
+.titleText {
+	font-family: "Roboto Mono", monospace;
+	color: #e6c07b;
+}

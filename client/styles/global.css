@@ -1,2 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Averia+Serif+Libre&family=Chango&display=swap");
 
-
+body {
+	font-family: "Averia Serif Libre", cursive;
+	background-color: #282c34;
+	color: #abb2bf;
+}
