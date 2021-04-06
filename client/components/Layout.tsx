@@ -1,8 +1,6 @@
 import React, { ReactNode } from "react";
-import Link from "next/link";
 import Head from "next/head";
-import { Typography } from "@material-ui/core";
-import styles from "../styles/Layout.module.css";
+//import styles from "../styles/Layout.module.css";
 
 type Props = {
 	children?: ReactNode;

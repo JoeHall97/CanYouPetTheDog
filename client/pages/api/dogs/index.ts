@@ -24,7 +24,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		let next_token = meta.next_token;
 		while (next_token) {
 			const gameName: string = req.body.name.toLowerCase();
-			data.forEach((tweet) => {
+			data.forEach((tweet: { id: string; text: string }) => {
 				if (
 					tweet.text.toLowerCase().includes(gameName) &&
 					(tweet.text.toLowerCase().includes(canPet) || tweet.text.toLowerCase().includes(cannotPet))

@@ -1,4 +1,5 @@
 import Layout from "../components/Layout";
+import Tweet from "../components/Tweet";
 import React from "react";
 import axios from "axios";
 import styles from "../styles/index.module.css";
@@ -10,6 +11,7 @@ class IndexPage extends React.Component {
 		this.state = {
 			message: "",
 			gameName: "",
+			tweetId: "",
 			dog: true,
 		};
 		this.handleChange = this.handleChange.bind(this);
@@ -23,13 +25,18 @@ class IndexPage extends React.Component {
 		const cannotFindGame = "It doesn't seem like there's anything on this game.";
 		const errorMessage = "Oops, something went wrong!";
 		const getAPIPost = async () => {
+			// reset state
+			this.setState({
+				tweetId: "",
+				message: "",
+			});
 			try {
 				const res = await axios.post("/api/dogs", { name: this.state.gameName });
-				// console.log(res.data.data.text);
-				const tweetText: string = res.data.data.text;
+				const tweet: { id: string; text: string } = res.data.data;
 				this.setState({
-					message: tweetText,
-					dog: tweetText.toLowerCase().includes("dog"),
+					tweetId: tweet.id,
+					message: tweet.text,
+					dog: tweet.text.toLowerCase().includes("dog"),
 				});
 			} catch (err) {
 				console.log(err);
@@ -47,37 +54,19 @@ class IndexPage extends React.Component {
 
 		const displayMessage = () => {
 			if (!this.state.message) {
-				return "";
+				return <div></div>;
 			} else if (this.state.message === cannotFindGame || this.state.message === errorMessage) {
-				return this.state.message;
+				return <div>{this.state.message}</div>;
 			} else {
-				let url = "";
-				let message = this.state.message.trim();
-				for (let i = message.length - 1; i > 0; i--) {
-					if (message[i] === " ") {
-						url = message.slice(i + 1, message.length);
-						console.log(url);
-						message = message.slice(0, i);
-						break;
-					}
-				}
-				if (this.state.dog) {
-					return (
-						<div>
-							<p>{message}</p>
-							<img src={url} alt="Image of Game" />
-						</div>
-					);
-				}
-				return `You cannot pet the dog in ${this.state.gameName}...
-But, ${message}`;
+				console.log(this.state.tweetId);
+				return <Tweet tweetId={this.state.tweetId} />;
 			}
 		};
 
 		return (
 			<Layout title="Can You Pet The Dog">
 				<div>
-					<Grid container direction="row" spacing={4} alignItems="center" justify="center">
+					<Grid container direction="row" spacing={4} alignContent="center" alignItems="center" justify="center">
 						<Grid item xs={1} />
 						<Grid item xs={10}>
 							<Typography variant="h1" align="center" className={styles.titleText}>
@@ -92,20 +81,20 @@ But, ${message}`;
 								value={this.state.gameName}
 								onChange={this.handleChange}
 								placeholder="Enter a game name..."
-								style={{ width: "70%", color: "#abb2bf" }}
+								className={styles.gameNameInput}
+								style={{ color: "#abb2bf" }}
 								color="secondary"
 							/>
 							<Button className={styles.searchButton} style={{ backgroundColor: "#e6c07b" }} onClick={getAPIPost}>
 								Find
 							</Button>
 						</Grid>
-						<Grid item xs={2} />
-						<Grid item xs={8}>
-							<Typography style={{ whiteSpace: "pre-line" }} variant="h4" align="center">
-								{displayMessage()}
-							</Typography>
+						<Grid item xs={1} />
+						<Grid item xs={4} />
+						<Grid item xs={4}>
+							<div className={styles.tweet}>{displayMessage()}</div>
 						</Grid>
-						<Grid item xs={2} />
+						<Grid item xs={4} />
 					</Grid>
 				</div>
 			</Layout>

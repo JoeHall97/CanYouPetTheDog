@@ -1,7 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
 .searchButton {
 	background-color: #e6c07b;
+	font-weight: bold;
 	width: 30%;
+}
+
+.gameNameInput {
+	width: 70%;
+}
+
+.tweet {
+	width: 100%;
+	height: 100%;
 }
 
 .centerText {
