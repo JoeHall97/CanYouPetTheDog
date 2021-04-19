@@ -2,6 +2,7 @@
 
 body {
 	font-family: "Averia Serif Libre", cursive;
+	font-size: inherit;
 	background-color: #282c34;
 	color: #abb2bf;
 }

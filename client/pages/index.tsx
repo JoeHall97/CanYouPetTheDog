@@ -3,7 +3,6 @@ import Tweet from "../components/Tweet";
 import React from "react";
 import axios from "axios";
 import styles from "../styles/index.module.css";
-import { Input, Button, Typography, Grid } from "@material-ui/core";
 
 class IndexPage extends React.Component {
 	constructor(props) {
@@ -66,7 +65,7 @@ class IndexPage extends React.Component {
 		return (
 			<Layout title="Can You Pet The Dog">
 				<div>
-					<Grid container direction="row" spacing={4} alignContent="center" alignItems="center" justify="center">
+					{/* <Grid container direction="row" spacing={4} alignContent="center" alignItems="center" justify="center">
 						<Grid item xs={1} />
 						<Grid item xs={10}>
 							<Typography variant="h1" align="center" className={styles.titleText}>
@@ -95,7 +94,29 @@ class IndexPage extends React.Component {
 							<div className={styles.tweet}>{displayMessage()}</div>
 						</Grid>
 						<Grid item xs={4} />
-					</Grid>
+					</Grid> */}
+					<div className={styles.container}>
+						{/* <div className={styles.item}> */}
+						<h1 className={[styles.titleText, styles.item].join(" ")}>Can You Pet The Dog?</h1>
+						{/* </div> */}
+						<div className={styles.item}>
+							<input
+								type="text"
+								value={this.state.gameName}
+								onChange={this.handleChange}
+								placeholder="Enter a game name..."
+								className={styles.gameNameInput}
+								style={{ color: "#abb2bf" }}
+								color="secondary"
+							/>
+							<button className={styles.searchButton} onClick={getAPIPost}>
+								Find
+							</button>
+						</div>
+						{/* <div className={styles.item}> */}
+						<div className={[styles.tweet, styles.item].join(" ")}>{displayMessage()}</div>
+						{/* </div> */}
+					</div>
 				</div>
 			</Layout>
 		);
