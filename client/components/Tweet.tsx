@@ -1,11 +1,11 @@
-import { TwitterTweetEmbed } from "react-twitter-embed";
+import { Tweet } from "react-twitter-widgets";
 
 type Props = {
 	tweetId: string;
 };
 
-const Tweet = ({ tweetId }: Props): JSX.Element => {
-	return <TwitterTweetEmbed tweetId={tweetId} placeholder="Loading..." />;
+export const DisplayTweet = ({ tweetId }: Props): JSX.Element => {
+	return <Tweet tweetId={tweetId} />;
 };
 
-export default Tweet;
+// export default DisplayTweet;

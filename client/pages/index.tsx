@@ -1,11 +1,20 @@
 import Layout from "../components/Layout";
-import Tweet from "../components/Tweet";
+import { DisplayTweet } from "../components/Tweet";
 import React from "react";
 import axios from "axios";
 import styles from "../styles/index.module.css";
 
-class IndexPage extends React.Component {
-	constructor(props) {
+interface AppProps {}
+
+interface AppState {
+	message: string;
+	gameName: string;
+	tweetId: string;
+	dog: boolean;
+}
+
+class IndexPage extends React.Component<AppProps, AppState> {
+	constructor(props: AppProps) {
 		super(props);
 		this.state = {
 			message: "",
@@ -16,7 +25,8 @@ class IndexPage extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-	handleChange(event): void {
+	handleChange(event: any): void {
+		console.log(typeof event);
 		this.setState({ gameName: event.target.value });
 	}
 
@@ -58,7 +68,7 @@ class IndexPage extends React.Component {
 				return <div>{this.state.message}</div>;
 			} else {
 				console.log(this.state.tweetId);
-				return <Tweet tweetId={this.state.tweetId} />;
+				return <DisplayTweet tweetId={this.state.tweetId} />;
 			}
 		};
 
