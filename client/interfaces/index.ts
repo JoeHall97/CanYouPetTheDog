@@ -4,9 +4,14 @@
 //
 // import { User } from 'path/to/interfaces';
 
-export type User = {
-	id: number;
-	name: string;
+// export type User = {
+// 	id: number;
+// 	name: string;
+// };
+
+export type Data = {
+	id: string;
+	text: string;
 };
 
 export type Meta = {
@@ -14,4 +19,9 @@ export type Meta = {
 	newest_id: string;
 	result_count: number;
 	next_token: string;
+};
+
+export type TwitterApiReturn = {
+	data: Data[];
+	meta: Meta;
 };

@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { TwitterApiReturn } from "../../../interfaces";
 import Twitter from "twitter-v2";
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
 	const BreakException = { message: "Found relevant tweet" };
 	const canPet = "you can pet";
 	const cannotPet = "you cannot pet";
@@ -16,7 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		// TWITTER V2 API
 		// iterate through timeline, find relevant tweet (if it exists), return it
 		// else, return error
-		let { data, meta } = await client.get("users/1102974090581864448/tweets", {
+		let { data, meta } = await client.get<TwitterApiReturn>("users/1102974090581864448/tweets", {
 			"tweet.fields": "text",
 			exclude: "retweets,replies",
 			max_results: "100",
@@ -34,14 +35,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 					throw BreakException;
 				}
 			});
-			[data, meta] = await client.get("users/1102974090581864448/tweets", {
+			let next_tweets = await client.get<TwitterApiReturn>("users/1102974090581864448/tweets", {
 				"tweet.fields": "text",
 				exclude: "retweets,replies",
 				max_results: "100",
 				pagination_token: next_token,
 			});
-			// data = next_tweets.data;
-			// meta = next_tweets.meta;
+			data = next_tweets.data;
+			meta = next_tweets.meta;
 			next_token = meta.next_token;
 		}
 		res.status(404).json({ message: "Tweets not found." });

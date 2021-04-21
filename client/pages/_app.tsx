@@ -2,7 +2,7 @@
 import type { AppProps /*, AppContext */ } from "next/app";
 import "../styles/global.css";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 	return <Component {...pageProps} />;
 }
 
