@@ -35,7 +35,6 @@ class IndexPage extends React.Component<AppProps, AppState> {
 	}
 
 	handleChange(event: any): void {
-		// console.log(typeof event);
 		this.setState({ gameName: event.target.value });
 	}
 
@@ -88,7 +87,7 @@ class IndexPage extends React.Component<AppProps, AppState> {
 			<Layout title="Can You Pet The Dog">
 				<div>
 					<div className={styles.container}>
-						<h1 className={[styles.titleText, styles.item].join(" ")}>Can You Pet The Dog?</h1>
+						<h1 className={styles.item}>Can You Pet The Dog?</h1>
 						<div className={styles.item}>
 							<input
 								type="text"
@@ -101,7 +100,7 @@ class IndexPage extends React.Component<AppProps, AppState> {
 								Find
 							</button>
 						</div>
-						<div className={[styles.tweet, styles.item].join(" ")}>{displayMessage()}</div>
+						<div className={styles.tweet}>{displayMessage()}</div>
 					</div>
 				</div>
 			</Layout>

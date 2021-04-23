@@ -6,3 +6,10 @@ body {
 	background-color: #282c34;
 	color: #abb2bf;
 }
+
+h1 {
+	font-family: "Roboto Mono", monospace;
+	font-size: 4rem;
+	color: #e6c07b;
+	text-align: center;
+}

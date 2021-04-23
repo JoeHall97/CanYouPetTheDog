@@ -1,37 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
 
 .searchButton {
-	background-color: #e6c07b;
+	background-color: hsl(20, 68%, 69%);
 	font-size: 1.5rem;
-	width: 6rem;
+	width: 18%;
 	height: 2.5rem;
-	margin-left: 0.5rem;
+	/* margin-left: 1%; */
+	margin: 1%;
 	border-radius: 4px;
 }
 
 .gameNameInput {
-	width: fit-content;
-	height: 2.2rem;
-	margin-right: 0.5rem;
+	width: 75%;
+	height: 2.1rem;
+	/* margin-right: 1%; */
+	margin: 1%;
 	font-size: 1.5rem;
 	border-radius: 4px;
 }
 
 .tweet {
-	width: 100%;
-	height: 100%;
-}
-
-/* .centerText {
-	justify-content: center;
-	align-items: center;
-} */
-
-.titleText {
-	font-family: "Roboto Mono", monospace;
-	font-size: 4rem;
-	color: #e6c07b;
+	margin-top: 4%;
 	align-self: center;
+	justify-content: center;
+	width: 550px;
+	height: 839px;
 }
 
 .container {
@@ -39,18 +32,12 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	/* grid-template-rows: auto;
-	justify-items: center;
-	align-items: center; */
 }
 
 .item {
 	align-self: center;
 	justify-content: center;
 	width: 80%;
-	/* align-content: center; */
-	/* justify-self: stretch; */
-	/* width: 70%; */
 }
 
 .padding {
