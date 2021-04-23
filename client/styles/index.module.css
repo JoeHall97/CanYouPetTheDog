@@ -3,7 +3,7 @@
 .searchButton {
 	background-color: hsl(20, 68%, 69%);
 	font-size: 1.5rem;
-	width: 18%;
+	width: 22%;
 	height: 2.5rem;
 	/* margin-left: 1%; */
 	margin: 1%;
@@ -11,9 +11,8 @@
 }
 
 .gameNameInput {
-	width: 75%;
+	width: 70%;
 	height: 2.1rem;
-	/* margin-right: 1%; */
 	margin: 1%;
 	font-size: 1.5rem;
 	border-radius: 4px;
@@ -23,7 +22,7 @@
 	margin-top: 4%;
 	align-self: center;
 	justify-content: center;
-	width: 550px;
+	width: min(550px, 90%);
 	height: 839px;
 }
 
@@ -37,7 +36,7 @@
 .item {
 	align-self: center;
 	justify-content: center;
-	width: 80%;
+	width: 90%;
 }
 
 .padding {
