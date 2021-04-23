@@ -30,7 +30,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
 					tweet.text.toLowerCase().includes(gameName) &&
 					(tweet.text.toLowerCase().includes(canPet) || tweet.text.toLowerCase().includes(cannotPet))
 				) {
-					// console.log("TEST");
 					res.status(200).json({ data: tweet });
 					throw BreakException;
 				}

@@ -7,5 +7,3 @@ type Props = {
 export const DisplayTweet = ({ tweetId }: Props): JSX.Element => {
 	return <Tweet tweetId={tweetId} />;
 };
-
-// export default DisplayTweet;

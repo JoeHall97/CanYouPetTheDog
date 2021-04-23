@@ -1,6 +1,6 @@
 import Layout from "../components/Layout";
 import { DisplayTweet } from "../components/Tweet";
-import { Data } from "../interfaces";
+import type { Data } from "../interfaces";
 import React from "react";
 import axios, { AxiosResponse } from "axios";
 import styles from "../styles/index.module.css";
