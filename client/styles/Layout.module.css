@@ -1,0 +1,9 @@
+.navlink {
+	font-size: 1.75rem;
+	color: hsl(207, 81%, 66%);
+	margin: 0.5%;
+}
+
+.navlink:hover {
+	color: hsl(235, 81%, 66%);
+}

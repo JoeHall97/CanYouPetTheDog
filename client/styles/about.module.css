@@ -1,0 +1,10 @@
+.abouttext {
+	text-align: center;
+	font-size: 2rem;
+	width: clamp(15ch, 50%, 75ch);
+}
+
+.centertext {
+	display: grid;
+	place-items: center;
+}
