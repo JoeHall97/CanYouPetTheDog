@@ -17,3 +17,16 @@ h1 {
 header {
 	text-align: center;
 }
+
+a {
+	color: hsl(207, 81%, 66%);
+}
+
+a:hover {
+	color: hsl(235, 81%, 66%);
+}
+
+footer {
+	text-align: center;
+	font-size: 1rem;
+}

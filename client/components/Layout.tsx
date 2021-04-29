@@ -12,21 +12,24 @@ const Layout = ({ children, title = "This is the default title" }: Props): JSX.E
 	<div style={{ width: "100%" }}>
 		<Head>
 			<title>{title}</title>
-			<meta charSet='utf-8' />
-			<meta name='viewport' content='initial-scale=1.0, width=device-width' />
+			<meta charSet="utf-8" />
+			<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 		</Head>
 		<header>
 			<nav>
-				<Link href='/'>
+				<Link href="/">
 					<a className={styles.navlink}>Home</a>
 				</Link>
 				{"    "}|{"    "}
-				<Link href='/about'>
+				<Link href="/about">
 					<a className={styles.navlink}>About</a>
 				</Link>
 			</nav>
 		</header>
 		{children}
+		<footer>
+			This site was created by <a href="https://joehall.co.nz">Joseph Hall</a>
+		</footer>
 	</div>
 );
 
