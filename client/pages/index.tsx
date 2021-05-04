@@ -87,22 +87,20 @@ class IndexPage extends React.Component<AppProps, AppState> {
 		};
 
 		return (
-			<Layout title="Can You Pet The Dog">
+			<Layout title='Can You Pet The Dog'>
 				<div>
 					<div className={styles.container}>
 						<h1 className={styles.item}>Can You Pet The Dog?</h1>
-						<div className={styles.item}>
-							<form onSubmit={this.handleSubmit}>
-								<input
-									type="text"
-									value={this.state.gameName}
-									onChange={this.handleChange}
-									placeholder="Enter a game name..."
-									className={styles.gameNameInput}
-								/>
-								<input type="submit" className={styles.searchButton} value="Search" />
-							</form>
-						</div>
+						<form onSubmit={this.handleSubmit} className={styles.searchForm}>
+							<input
+								type='text'
+								value={this.state.gameName}
+								onChange={this.handleChange}
+								placeholder='Enter a game name...'
+								className={[styles.gameNameInput, styles.col9].join(" ")}
+							/>
+							<input type='submit' className={[styles.searchButton, styles.col3].join(" ")} value='Search' />
+						</form>
 						<div className={styles.tweet}>{displayMessage()}</div>
 					</div>
 				</div>
